@@ -1,0 +1,48 @@
+$_white:#fff;
+
+$blue-000:#D5D4D8;
+$blue-100:#6B7280;
+$blue-200:#3b4d66;
+$blue-300:#273549;
+$blue-400:#263345;
+$blue-500:#2B283A;
+$blue-600:#1e2938;
+
+$green-001:#ecfdf5b7;
+$green-000:#e7fbf2;
+$green-100:#5DEF92;
+$green-200:#4ADF86;
+$green-300:#10B981;
+
+@mixin commonColor{
+    --btn-bg-color:#{$green-300};
+    --hr-color:#{$blue-200};
+    --green-txt-color:#{$green-100};
+}
+
+html[data-theme="dark"] {
+    @include commonColor;
+    --bg-body:#{$blue-600};
+    --bg-color: #{$blue-400};
+    --password-bg-color:#{$blue-200};
+
+    --title-color1: #{$_white};
+    --title-color2: #{$green-200};
+    --color: #{$blue-000};
+    --darktoLight:#{$blue-500};
+    --range-line:#{$blue-100};
+  }
+  
+  html[data-theme="light"] {
+    @include commonColor;
+    --bg-body:#{$green-001};
+    --bg-color: #{$green-000};
+    
+    --password-bg-color:#{$blue-300};
+
+    --title-color1: #{$blue-500};
+    --title-color2: #{$green-300};
+    --color: #{$blue-100};
+    --darktoLight:#{$_white};
+    --range-line:#{$blue-000};
+  }

@@ -1,0 +1,231 @@
+@import "./colorVariables";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Karla:ital,wght@0,200..800;1,200..800&display=swap");
+
+$ff-karla: "Inter", sans-serif;
+$ff-inter: "Inter", sans-serif;
+
+$fs-extraLarg: 3rem;
+$fs-larg: 1.75rem;
+$fs-medium: 1.45rem;
+$fs-small: 1.25rem;
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin resetButton($bg-color) {
+  border: none;
+  cursor: pointer;
+  background-color: $bg-color;
+}
+@mixin resetLabel {
+  color: var(--color);
+  font-size: $fs-medium;
+  margin: 10px 0px;
+}
+@mixin rangeThumb {
+  appearance: none;
+  background-color: var(--title-color1);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.5rem;
+  &:hover {
+    border: 2px solid var(--btn-bg-color);
+    background-color: var(--darktoLight);
+  }
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  @include flex;
+  max-width: 100vw;
+  min-height: 100vh;
+  background-color: var(--bg-body);
+  font-family: $ff-inter;
+}
+#root {
+  background-color: var(--bg-color);
+  border-radius: 2rem;
+}
+#dark-mode {
+  visibility: hidden;
+}
+.toggleTheme {
+  float: right;
+  display: block;
+  width: 4.2rem;
+  height: 1.8rem;
+  padding: 0.1rem;
+  margin: 3rem;
+  border-radius: 1rem;
+  background-color: var(--title-color1);
+  position: relative;
+  .themeImage {
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 0.9rem;
+    padding: 0.2rem;
+    background-color: var(--darktoLight);
+    background-image: url("../../public/light_mode.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    transform: translateX(0);
+    animation: toggleOff 0.4s ease forwards;
+  }
+}
+#dark-mode:checked + .toggleTheme {
+  .themeImage {
+    background-image: url("../../public/dark_mode.svg");
+    transform: translateX(2.4rem);
+    animation: toggleOn 0.4s ease forwards;
+  }
+}
+label {
+  cursor: pointer;
+}
+main {
+  padding: 100px 52px;
+}
+
+h1.title {
+  color: var(--title-color1);
+  font-family: $ff-karla;
+  font-weight: 800;
+  font-size: $fs-extraLarg;
+  width: 427px;
+  .greenTitle {
+    white-space: nowrap;
+    color: var(--title-color2);
+  }
+}
+p.description {
+  color: var(--color);
+  font-size: $fs-larg;
+  margin: 12px 0px 35px;
+}
+
+.checkboxLabel {
+  @include resetLabel;
+  display: block;
+  &:hover {
+    .checkmark {
+      border-color: var(--btn-bg-color);
+    }
+  }
+  .checkmark {
+    width: 1.1rem;
+    height: 1.1rem;
+    border: 2px solid var(--title-color1);
+    margin-inline: -8px 10px;
+    display: inline-block;
+  }
+}
+input[type="checkbox"] {
+  visibility: hidden;
+  &:checked + .checkmark {
+    background-image: url("../../public/check_mark.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: var(--btn-bg-color);
+    border: none;
+  }
+}
+
+.lengthLabel {
+  @include resetLabel;
+  display: inline-block;
+  width: 400px;
+
+  .lengthValue {
+    color: var(--title-color2);
+    float: right;
+    margin-right: 6px;
+    font-weight: bold;
+  }
+
+  input[type="range"]#length {
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: 5px;
+    margin: 10px 0px;
+    border-radius: 4px;
+    background: var(--range-line);
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+      @include rangeThumb;
+    }
+    &::-moz-range-thumb {
+      @include rangeThumb;
+    }
+  }
+}
+
+.submit {
+  @include resetButton(var(--btn-bg-color));
+  color: $_white;
+  font-size: $fs-medium;
+  padding: 12px 25px;
+  margin: 2rem 0rem;
+  display: block;
+  border-radius: 10px;
+}
+
+hr {
+  height: 1px;
+  background-color: var(--hr-color);
+  border: none;
+}
+
+.passwordContent {
+  @include flex;
+  width: 20rem;
+  height: 4rem;
+  background-color: var(--password-bg-color);
+  border-radius: 1rem;
+  margin: 1rem 0rem;
+  font-size: $fs-medium;
+  color: var(--green-txt-color);
+  padding: 0px 20px;
+  justify-content: space-between;
+  .copy {
+    @include resetButton(transparent);
+    &:hover {
+      svg {
+        fill: var(--btn-bg-color);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  h1.title {
+    font-size: 2.5rem;
+    width: auto;
+  }
+}
+
+@keyframes toggleOn {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translateX(2.4rem);
+  }
+}
+
+@keyframes toggleOff {
+  0% {
+    transform: translateX(2.4rem);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
